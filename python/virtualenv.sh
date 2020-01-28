@@ -1,3 +1,5 @@
+# depends: python3
+
 vn() {
     python3 -m venv "/home/ras/.venv/$@"
 }

@@ -1,3 +1,5 @@
+# depends: dockd feh
+
 # alias dock="sudo dockd --set docked; ~/.fehbg"
 dock() {
     sudo dockd --set docked

@@ -1,3 +1,5 @@
+# depends: grep sed
+
 # "grep here"
 
 gh() {
