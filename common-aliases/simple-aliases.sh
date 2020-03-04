@@ -12,3 +12,5 @@ saved() {
         mv "$HOME/Downloads/$file" "$HOME/SavedDownloads/$file"
     done
 }
+
+alias clear-logs='sudo /bin/sh -c "journalctl --rotate && journalctl --vacuum-time=1s"'
