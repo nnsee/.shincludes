@@ -5,6 +5,7 @@ alias up='yay -Syu'
 alias whoowns='yay -Qo'
 
 alias ip='ip -h -c' # adds some colour
+alias ipa='ip -br a' # brief IP listing
 
 saved() {
     # my Downloads is a tmpfs
