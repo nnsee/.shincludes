@@ -13,7 +13,7 @@ file_exists () {
 
 take_screenshot () { 
     DOMAIN="arse.ee"
-    SCREENSHOT=$(maim -s 2>/dev/null | cat)
+    SCREENSHOT=$(maim -u -s 2>/dev/null | cat)
     
     [ "x" = "x$SCREENSHOT" ] && exit 0 # pressed escape
 
@@ -24,5 +24,5 @@ take_screenshot () {
 
     ssh s "dd of=/var/www/${DOMAIN}/${FILENAME}" <<< "$SCREENSHOT"
 
-    echo "https://${DOMAIN}/${FILENAME}" | xclip -selection c
+    echo -n "https://${DOMAIN}/${FILENAME}" | xclip -selection c
 }
