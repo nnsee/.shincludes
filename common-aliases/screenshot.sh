@@ -14,8 +14,6 @@ file_exists () {
 take_screenshot () { 
     DOMAIN="arse.ee"
     SCREENSHOT=$(maim -u -s 2>/dev/null | cat)
-    
-    [ "x" = "x$SCREENSHOT" ] && exit 0 # pressed escape
 
     FILENAME="$(randchars 8).png"
     while file_exists "https://${DOMAIN}/${FILENAME}"; do
