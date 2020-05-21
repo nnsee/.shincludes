@@ -7,6 +7,9 @@ alias whoowns='yay -Qo'
 alias ip='ip -h -c' # adds some colour
 alias ipa='ip -br a' # brief IP listing
 
+# depends: highlight
+alias ccat='highlight -O truecolor --base16'
+
 saved() {
     # my Downloads is a tmpfs
     for file in $@; do
