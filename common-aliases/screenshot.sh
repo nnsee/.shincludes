@@ -14,7 +14,8 @@ file_exists () {
 
 take_screenshot () { 
     DOMAIN="arse.ee"
-    SCREENSHOT=$(maim -u -s /proc/self/fd/1 2> /dev/null)
+#   SCREENSHOT=$(maim -u -s /proc/self/fd/1 2> /dev/null)
+    SCREENSHOT=$(grim -g "$(slurp)" /proc/self/fd/1 2>/dev/null)
 
     [ $? -eq 0 ] || return 1 # screenshot failed
 
