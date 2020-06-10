@@ -1,0 +1,11 @@
+# this won't be sourced by zsh, but instead sourced before
+# executing the WM - in my case, sway
+
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.xrender=true'
+export JAVA_OPTIONS="${_JAVA_OPTIONS}"
+export _JAVA_FONTS="/usr/share/fonts/TTF"
+export JAVA_FONTS="${_JAVA_FONTS}"
+export _JAVA_AWT_WM_NONREPARENTING=1
+export AWT_TOOLKIT="MToolkit"
+export XKB_DEFAULT_LAYOUT="us,ee"
+export XKB_DEFAULT_OPTIONS="grp:win_space_toggle"
