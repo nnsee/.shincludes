@@ -33,11 +33,13 @@ take_screenshot () {
     [ -z "$(which notify-send)" ] && return $RETCODE
 
     if [ 0 -eq $RETCODE ]; then
-        MSG="Image uploaded"$'\n'"https://${URL}"
+        MSG="Image uploaded"
+	LINK="<a href='https://${URL}'>https://${URL}</a>"
     else
         MSG="Image upload failed"
+	LINK=""
     fi
 
-    notify-send -t 5000 "$MSG"
+    notify-send -t 5000 "$MSG" "$LINK"
     return $RETCODE
 }
