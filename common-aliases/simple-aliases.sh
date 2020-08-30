@@ -4,6 +4,7 @@ alias i='yay -S'
 alias up='yay -Syu'
 alias whoowns='yay -Qo'
 alias ownswhom='yay -Ql'
+alias whatprovides='yay -F'
 
 alias ip='ip -h -c' # adds some colour
 alias ipa='ip -br a' # brief IP listing
