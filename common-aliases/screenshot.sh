@@ -12,7 +12,7 @@ file_exists () {
     return 1 # file does not exist
 }
 
-take_screenshot () { 
+take_screenshot () {
     DOMAIN="arse.ee"
 #   SCREENSHOT=$(maim -u -s /proc/self/fd/1 2> /dev/null)
     SCREENSHOT=$(grim -g "$(slurp)" /proc/self/fd/1 2>/dev/null)

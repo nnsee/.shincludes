@@ -4,16 +4,16 @@
 
 HOSTNAME=$(hostname)
 
-function virtual_env_prompt () {                                                                      
-    REPLY=${VIRTUAL_ENV+(${VIRTUAL_ENV:t}) }                
+function virtual_env_prompt () {
+    REPLY=${VIRTUAL_ENV+(${VIRTUAL_ENV:t}) }
 }
 
 grml_theme_add_token virtual-env -f virtual_env_prompt '%F{magenta}' '%f'
 
 # show hostname when ssh'd in
 
-function ssh_conn_prompt () {                                                                      
-    REPLY=${SSH_CONNECTION+@${HOSTNAME:t} }                
+function ssh_conn_prompt () {
+    REPLY=${SSH_CONNECTION+@${HOSTNAME:t} }
 }
 
 grml_theme_add_token ssh-conn -f ssh_conn_prompt '%F{white}' '%f'
