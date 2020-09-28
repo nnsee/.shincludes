@@ -11,6 +11,9 @@ alias ipa='ip -br a' # brief IP listing
 # depends: highlight
 alias ccat='highlight -O truecolor --base16'
 
+# depends: nvim
+alias svim='sudo -E nvim'
+
 # depends: exa
 alias ls='exa -lh --git'
 

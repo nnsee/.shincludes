@@ -1,11 +1,11 @@
 # depends: python3
 
 vn() {
-    python3 -m venv "/home/ras/.venv/$@"
+    python3 -m venv "$HOME/.venv/$@"
 }
 
 va() {
-    source "/home/ras/.venv/$@/bin/activate"
+    source "$HOME/.venv/$@/bin/activate"
 }
 
 vd() {
@@ -13,6 +13,6 @@ vd() {
 }
 
 vl() {
-    ls /home/ras/.venv/
+    ls "$HOME/.venv/"
 }
 
