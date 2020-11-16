@@ -5,6 +5,8 @@ alias whoowns='yay -Qo'
 alias ownswhom='yay -Ql'
 alias whatprovides='yay -F'
 
+alias weather='curl -s v2.wttr.in/Tallinn | head -n-1'
+
 alias ip='ip -h -c' # adds some colour
 alias ipa='ip -br a' # brief IP listing
 
@@ -29,5 +31,16 @@ bgr() {
     nohup $@ 2>&1 > /dev/null &
     disown
 }
+
+incognito() {
+    # disable history
+    unsetopt hist_append
+    unsetopt hist_expand
+    export HISTFILE=
+    export HISTSIZE=0
+    export SAVEHIST=0
+    export INCOGNITO=1
+}
+
 
 alias clear-logs='sudo /bin/sh -c "journalctl --rotate && journalctl --vacuum-time=1s"'
