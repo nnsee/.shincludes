@@ -1,9 +1,20 @@
-# depends: yay
-alias i='yay -S'
-alias up='yay -Syu'
-alias whoowns='yay -Qo'
-alias ownswhom='yay -Ql'
-alias whatprovides='yay -F'
+OS_RELEASE=$(lsb_release -si)
+
+# depends: paru
+[ $OS_RELEASE = "Arch" ] && \
+    alias i='paru -S' && \
+    alias up='paru -Syu' && \
+    alias whoowns='paru -Qo' && \
+    alias ownswhom='paru -Ql' && \
+    alias whatprovides='paru -F'
+
+# depends: paru
+[ $OS_RELEASE = "Ubuntu" ] && \
+    alias i='sudo apt install' && \
+    alias up='sudo apt update && sudo apt -y full-upgrade' && \
+    alias whoowns='dpkg -S' && \
+    alias ownswhom='dpkg -L' # && \
+#    alias whatprovides='' # not implemented on ubuntu yet
 
 alias bthp='bluetoothctl power on; bluetoothctl connect 94:DB:56:6B:E3:8A'
 
