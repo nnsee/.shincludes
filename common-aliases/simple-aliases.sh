@@ -1,4 +1,4 @@
-OS_RELEASE=$(lsb_release -si)
+[ -z ${OS_RELEASE+x} ] && export OS_RELEASE=$(lsb_release -si)
 
 # depends: paru
 [ $OS_RELEASE = "Arch" ] && \
