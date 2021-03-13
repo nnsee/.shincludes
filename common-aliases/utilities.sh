@@ -15,3 +15,23 @@ bcat() {
         fi
     done
 }
+
+mpva() {
+    # mpv with basic auth
+    if [[ -z "$AHEADER" ]]; then
+	echo -n "Password: "
+	stty -echo
+	read -n password
+	stty echo
+	# yes, I know this isn't secure
+	AHEADER="Authorization: Basic $(b64e "xx:${password}")"
+	unset password
+    fi
+
+    mpv $@ --http-header-fields="$AHEADER"
+
+    RET=$?
+    [[ $RET = 2 ]] && unset AHEADER
+
+    return $RET
+}
