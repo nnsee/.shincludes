@@ -20,12 +20,9 @@ mpva() {
     # mpv with basic auth
     if [[ -z "$AHEADER" ]]; then
 	echo -n "Password: "
-	stty -echo
-	read -n password
-	stty echo
 	# yes, I know this isn't secure
-	AHEADER="Authorization: Basic $(b64e "xx:${password}")"
-	unset password
+	AHEADER="Authorization: Basic $(b64e "xx:$(read -se)")"
+	echo
     fi
 
     mpv $@ --http-header-fields="$AHEADER"
