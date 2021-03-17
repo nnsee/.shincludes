@@ -28,3 +28,5 @@ zstyle ':vcs_info:*' stagedstr '+'
 zstyle ':vcs_info:git*' formats "%{${fg[cyan]}%}[%{${fg[blue]}%}%b%{${fg[yellow]}%}%m%u%c%{${fg[cyan]}%}]%{$reset_color%} "
 
 zstyle ':prompt:grml:left:setup' items rc ssh-conn virtual-env change-root path vcs percent
+zstyle ':prompt:grml:right:setup' use-rprompt false
+RPS1=''
