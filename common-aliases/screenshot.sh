@@ -1,4 +1,4 @@
-# depends: maim xclip curl
+# depends: maim wl-clipboard curl
 # optional dep: libnotify
 
 randchars () {
@@ -28,7 +28,7 @@ take_screenshot () {
     ssh s "dd of=/var/www/${URL}" <<< "$SCREENSHOT"
     RETCODE=$?
 
-    echo -n "https://${URL}" | xclip -selection c
+    echo -n "https://${URL}" | wl-copy
 
     [ -z "$(which notify-send)" ] && return $RETCODE
 
