@@ -1,15 +1,14 @@
-[ -z ${OS_RELEASE+x} ] && export OS_RELEASE=$(lsb_release -si)
+[ -z ${ID+x} ] && source /etc/os-release
 
 # depends: paru
-[ $OS_RELEASE = "Arch" ] && \
+[ ${ID} = "arch" ] && \
     alias i='paru -S' && \
     alias up='paru -Syu' && \
     alias whoowns='paru -Qo' && \
     alias ownswhom='paru -Ql' && \
     alias whatprovides='paru -F'
 
-# depends: paru
-[ $OS_RELEASE = "Ubuntu" ] && \
+[ ${ID} = "ubuntu" ] && \
     alias i='sudo apt install' && \
     alias up='sudo apt update && sudo apt -y full-upgrade' && \
     alias whoowns='dpkg -S' && \

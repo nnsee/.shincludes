@@ -1,6 +1,6 @@
-[ -z ${OS_RELEASE+x} ] && export OS_RELEASE=$(lsb_release -si)
+[ -z ${ID+x} ] && source /etc/os-release
 
-[ $OS_RELEASE = "Arch" ] && \
+[ ${ID} = "arch" ] && \
 	PATHS=(
 		"/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 		"/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -8,7 +8,7 @@
 		"/usr/share/fzf/key-bindings.zsh"
 	)
 
-[ $OS_RELEASE = "Ubuntu" ] && \
+[ ${ID} = "ubuntu" ] && \
 	PATHS=(
 		"/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 		"/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
