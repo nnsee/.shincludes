@@ -1,14 +1,14 @@
-[ -z ${ID+x} ] && source /etc/os-release
+[ -z "${ID+x}" ] && source /etc/os-release
 
 # depends: paru
-[ ${ID} = "arch" ] && \
+[ "${ID}" = "arch" ] || [ "${ID_LIKE}" = "arch" ] && \
     alias i='paru -S' && \
     alias up='paru -Syu' && \
     alias whoowns='paru -Qo' && \
     alias ownswhom='paru -Ql' && \
     alias whatprovides='paru -F'
 
-[ ${ID} = "ubuntu" ] && \
+[ "${ID}" = "ubuntu" ] && \
     alias i='sudo apt install' && \
     alias up='sudo apt update && sudo apt -y full-upgrade' && \
     alias whoowns='dpkg -S' && \

@@ -1,6 +1,6 @@
-[ -z ${ID+x} ] && source /etc/os-release
+[ -z "${ID+x}" ] && source /etc/os-release
 
-[ ${ID} = "arch" ] && \
+[ "${ID}" = "arch" ] || [ "${ID_LIKE}" = "arch" ] && \
 	PATHS=(
 		"/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 		"/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -8,7 +8,7 @@
 		"/usr/share/fzf/key-bindings.zsh"
 	)
 
-[ ${ID} = "ubuntu" ] && \
+[ "${ID}" = "ubuntu" ] && \
 	PATHS=(
 		"/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 		"/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
