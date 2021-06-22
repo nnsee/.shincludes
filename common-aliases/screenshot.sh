@@ -43,3 +43,9 @@ take_screenshot () {
     notify-send -t 5000 "$MSG" "$LINK"
     return $RETCODE
 }
+
+local_screenshot () {
+    FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
+    grim -g "$(slurp)" "$FILENAME"
+    wl-copy < "$FILENAME"
+}
