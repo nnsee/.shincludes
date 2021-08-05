@@ -48,7 +48,7 @@ trap .prompt.git-status.sync ALRM
   local MATCH MBEGIN MEND
   local -a lines
 
-  lines=( ${(f)"$( git status -sbu 2> /dev/null )"} ) ||
+  lines=( ${(f)"$( git -c color.status=always status -sbu 2> /dev/null )"} ) ||
       { print; return } # Not a git repo
 
   local -aU symbols=( ${(@MSu)lines[2,-1]##[^[:blank:]]##} )
