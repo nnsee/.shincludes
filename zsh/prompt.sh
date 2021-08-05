@@ -18,16 +18,7 @@ function ssh_conn_prompt () {
 
 grml_theme_add_token ssh-conn -f ssh_conn_prompt '%F{white}' '%f'
 
-# change git display
-
-autoload -U colors && colors
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr '!'
-zstyle ':vcs_info:*' stagedstr '+'
-zstyle ':vcs_info:git*' formats "%{${fg[cyan]}%}[%{${fg[blue]}%}%b%{${fg[yellow]}%}%m%u%c%{${fg[cyan]}%}]%{$reset_color%} "
-
-zstyle ':prompt:grml:left:setup' items rc ssh-conn virtual-env change-root path vcs percent
+zstyle ':prompt:grml:left:setup' items rc ssh-conn virtual-env change-root path percent
 zstyle ':prompt:grml:right:setup' use-rprompt false
 RPS1=''
 
