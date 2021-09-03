@@ -49,3 +49,27 @@ local_screenshot () {
     grim -g "$(slurp)" "$FILENAME"
     wl-copy < "$FILENAME"
 }
+
+local_screenshot_broken () {
+    # pauses the screen when doing a selection
+    # requires the following line in sway config to work properly
+    # for_window [title="imv.*screenshot"] fullscreen global
+    if pidof -o %PPID -x "$0"; then
+        exit 0
+    fi
+
+    FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
+    screenshot="$(mktemp --suffix screenshot.ppm)"
+    grim -c -t ppm "${screenshot}"
+    imv -s none "${screenshot}" &
+    imv_pid=$!
+
+    while [ -z "$(swaymsg -t get_tree | grep imv)" ]; do
+        continue
+    done
+
+    convert -crop "$(slurp -d | perl -ne '/(\d+),(\d+) (.+)/;print"$3+$1+$2"')" "${screenshot}" "${FILENAME}"
+    wl-copy < "${FILENAME}"
+    kill -SIGKILL ${imv_pid}
+    rm "${screenshot}"
+}
