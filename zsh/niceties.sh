@@ -8,7 +8,7 @@
 		"/usr/share/fzf/key-bindings.zsh"
 	)
 
-[ "${ID}" = "ubuntu" || "${ID}" = "debian" ] && \
+[ "${ID}" = "ubuntu" ] || [ "${ID}" = "debian" ] && \
 	PATHS=(
 		"/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 		"/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"

@@ -8,7 +8,7 @@
     alias ownswhom='paru -Ql' && \
     alias whatprovides='paru -F'
 
-[ "${ID}" = "ubuntu" || "${ID}" = "debian" ] && \
+[ "${ID}" = "ubuntu" ] || [ "${ID}" = "debian" ] && \
     alias i='sudo apt install' && \
     alias up='sudo apt update && sudo apt -y full-upgrade' && \
     alias whoowns='dpkg -S' && \
