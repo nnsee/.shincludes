@@ -1,12 +1,15 @@
 # Reduce prompt latency by fetching git status asynchronously.
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd .prompt.git-status.async
+
 .prompt.git-status.async() {
   local fd
   exec {fd}< <( .prompt.git-status.parse )
   zle -Fw "$fd" .prompt.git-status.callback
 }
+
 zle -N .prompt.git-status.callback
+
 .prompt.git-status.callback() {
   local fd=$1 REPLY
   {
@@ -25,6 +28,7 @@ zle -N .prompt.git-status.callback
 # Periodically sync git status in prompt.
 TMOUT=2  # Update interval in seconds
 trap .prompt.git-status.sync ALRM
+
 .prompt.git-status.sync() {
   [[ $CONTEXT == start ]] ||
       return  # Update only on primary prompt.
