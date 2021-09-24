@@ -44,32 +44,30 @@ take_screenshot () {
     return $RETCODE
 }
 
-local_screenshot () {
+local_screenshot_old () {
     FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
     grim -g "$(slurp)" "$FILENAME"
     wl-copy < "$FILENAME"
 }
 
-local_screenshot_broken () {
+local_screenshot () {
     # pauses the screen when doing a selection
     # requires the following line in sway config to work properly
     # for_window [title="imv.*screenshot"] fullscreen global
-    if pidof -o %PPID -x "$0"; then
-        exit 0
-    fi
-
+    # also requires a patched sway due to a bug in cursor detection
+    # see: https://github.com/swaywm/sway/pull/6545
     FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
     screenshot="$(mktemp --suffix screenshot.ppm)"
     grim -c -t ppm "${screenshot}"
     imv -s none "${screenshot}" &
     imv_pid=$!
 
-    while [ -z "$(swaymsg -t get_tree | grep imv)" ]; do
-        continue
-    done
+    selection="$(slurp -df '%wx%h+%x+%y')"
+    if [ $? -eq 0 ]; then
+        convert -crop "${selection}" "${screenshot}" "${FILENAME}"
+        wl-copy < "${FILENAME}"
+    fi
 
-    convert -crop "$(slurp -d | perl -ne '/(\d+),(\d+) (.+)/;print"$3+$1+$2"')" "${screenshot}" "${FILENAME}"
-    wl-copy < "${FILENAME}"
     kill -SIGKILL ${imv_pid}
     rm "${screenshot}"
 }
