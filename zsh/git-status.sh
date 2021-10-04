@@ -26,8 +26,8 @@ zle -N .prompt.git-status.callback
 }
 
 # Periodically sync git status in prompt.
-TMOUT=2  # Update interval in seconds
-trap .prompt.git-status.sync ALRM
+# TMOUT=2  # Update interval in seconds
+# trap .prompt.git-status.sync ALRM
 
 .prompt.git-status.sync() {
   [[ $CONTEXT == start ]] ||
@@ -37,7 +37,7 @@ trap .prompt.git-status.sync ALRM
     ( git fetch -q &> /dev/null ) &|
     _prompt_last_fetch=$SECONDS
   fi
-  .prompt.git-status.repaint "$( .prompt.git-status.parse )"
+  # .prompt.git-status.repaint "$( .prompt.git-status.parse )"
 }
 
 .prompt.git-status.repaint() {
