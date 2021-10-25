@@ -1,9 +1,3 @@
-# depends: warpdrive
-
-wd() {
-    . $HOME/.local/share/wd/wd.sh
-}
-
 bcat() {
     # cat a binary file
     for bin in "$@"; do
@@ -16,19 +10,25 @@ bcat() {
     done
 }
 
-mpva() {
-    # mpv with basic auth
-    if [[ -z "$AHEADER" ]]; then
-	echo -n "Password: "
-	# yes, I know this isn't secure
-	AHEADER="Authorization: Basic $(b64e "xx:$(read -se)")"
-	echo
-    fi
+saved() {
+    # my Downloads is a tmpfs
+    for file in $@; do
+        mv "$HOME/Downloads/$file" "$HOME/SavedDownloads/$file"
+    done
+}
 
-    mpv $@ --http-header-fields="$AHEADER"
+bgr() {
+    # run in background, silence everything
+    nohup $@ 2>&1 > /dev/null &
+    disown
+}
 
-    RET=$?
-    [[ $RET = 2 ]] && unset AHEADER
-
-    return $RET
+incognito() {
+    # disable history
+    unsetopt hist_append
+    unsetopt hist_expand
+    export HISTFILE=
+    export HISTSIZE=0
+    export SAVEHIST=0
+    export INCOGNITO=1
 }
