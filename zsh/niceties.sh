@@ -1,7 +1,7 @@
 [ -z "${ID+x}" ] && source /etc/os-release
 
 [ "${ID}" = "arch" ] || [ "${ID_LIKE}" = "arch" ] && \
-	PATHS=(
+	local PATHS=(
 		"/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 		"/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 		"/usr/share/fzf/completion.zsh"
@@ -9,7 +9,7 @@
 	)
 
 [ "${ID}" = "ubuntu" ] || [ "${ID}" = "debian" ] && \
-	PATHS=(
+	local PATHS=(
 		"/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 		"/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 		"/usr/share/doc/fzf/examples/completion.zsh"
@@ -20,3 +20,4 @@ for file in "${PATHS[@]}"; do
 	[ -f "$file" ] && source "$file"
 done
 
+unset PATHS

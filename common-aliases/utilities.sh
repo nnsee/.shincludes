@@ -1,7 +1,7 @@
 bcat() {
     # cat a binary file
     for bin in "$@"; do
-        LOCATION=$(/usr/bin/which --skip-functions "$bin" 2>/dev/null)
+        local LOCATION=$(/usr/bin/which --skip-functions "$bin" 2>/dev/null)
         if [[ -z "$LOCATION" ]]; then
             echo "no such bin: $bin" 1>&2
         else
@@ -13,7 +13,7 @@ bcat() {
 saved() {
     # my Downloads is a tmpfs
     for file in $@; do
-        mv "$HOME/Downloads/$file" "$HOME/SavedDownloads/$file"
+        mv "$file" "$HOME/SavedDownloads/$file"
     done
 }
 
@@ -32,3 +32,4 @@ incognito() {
     export SAVEHIST=0
     export INCOGNITO=1
 }
+

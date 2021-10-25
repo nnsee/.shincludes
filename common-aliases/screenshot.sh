@@ -13,31 +13,31 @@ file_exists () {
 }
 
 take_screenshot () {
-    DOMAIN="arse.ee"
+    local DOMAIN="arse.ee"
 #   SCREENSHOT=$(maim -u -s /proc/self/fd/1 2> /dev/null)
-    SCREENSHOT=$(grim -g "$(slurp)" /proc/self/fd/1 2>/dev/null)
+    local SCREENSHOT=$(grim -g "$(slurp)" /proc/self/fd/1 2>/dev/null)
 
     [ $? -eq 0 ] || return 1 # screenshot failed
 
-    FILENAME="$(randchars 8).png"
-    URL="${DOMAIN}/${FILENAME}"
+    local FILENAME="$(randchars 8).png"
+    local URL="${DOMAIN}/${FILENAME}"
     while file_exists "https://${URL}"; do
         FILENAME="$(randchars 8).png"
     done
 
     ssh s "dd of=/var/www/${URL}" <<< "$SCREENSHOT"
-    RETCODE=$?
+    local RETCODE=$?
 
     echo -n "https://${URL}" | wl-copy
 
     [ -z "$(which notify-send)" ] && return $RETCODE
 
     if [ 0 -eq $RETCODE ]; then
-        MSG="Image uploaded"
-	LINK="<a href='https://${URL}'>https://${URL}</a>"
+        local MSG="Image uploaded"
+	local LINK="<a href='https://${URL}'>https://${URL}</a>"
     else
-        MSG="Image upload failed"
-	LINK=""
+        local MSG="Image upload failed"
+	local LINK=""
     fi
 
     notify-send -t 5000 "$MSG" "$LINK"
@@ -45,7 +45,7 @@ take_screenshot () {
 }
 
 local_screenshot_old () {
-    FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
+    local FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
     grim -g "$(slurp)" "$FILENAME"
     wl-copy < "$FILENAME"
 }
@@ -56,13 +56,13 @@ local_screenshot () {
     # for_window [title="imv.*screenshot"] fullscreen global
     # also requires a patched sway due to a bug in cursor detection
     # see: https://github.com/swaywm/sway/pull/6545
-    FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
-    screenshot="$(mktemp --suffix screenshot.ppm)"
+    local FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
+    local screenshot="$(mktemp --suffix screenshot.ppm)"
     grim -c -t ppm "${screenshot}"
     imv -s none "${screenshot}" &
-    imv_pid=$!
+    local imv_pid=$!
 
-    selection="$(slurp -df '%wx%h+%x+%y')"
+    local selection="$(slurp -df '%wx%h+%x+%y')"
     if [ $? -eq 0 ]; then
         convert -crop "${selection}" "${screenshot}" "${FILENAME}"
         wl-copy < "${FILENAME}"
