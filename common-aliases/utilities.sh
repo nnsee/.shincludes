@@ -35,13 +35,13 @@ incognito() {
 
 glog() {
     # pretty git log
-    local LOG=$(git log --color --graph \
+    local LOG="git log --color --graph \
       --pretty=format:'%G? %C(dim)%h%Creset %s %Cgreen(%cr)%C(yellow)%d%C(blue) <%an>%Creset' \
-      --abbrev-commit)
+      --abbrev-commit"
     local PR1='s/(\*.*\s)('
     local PR2=')(\s.*[a-f0-9]{7})/\1\x1b['
     local PR3='m\2\x1b[0m\3/g'
-    sed -E \
+    eval $LOG | sed -E \
       -e "${PR1}B${PR2}31${PR3}"   `# B - Bad`               \
       -e "${PR1}G${PR2}1;32${PR3}" `# G - Good`              \
       -e "${PR1}U${PR2}32${PR3}"   `# U - Good, unknown`     \
@@ -50,5 +50,5 @@ glog() {
       -e "${PR1}R${PR2}33${PR3}"   `# R - Good, revoked key` \
       -e "${PR1}E${PR2}33${PR3}"   `# E - Missing key`       \
       -e "${PR1}N${PR2}2${PR3}"    `# N - No signature`      \
-      <<< $LOG | less --quit-if-one-screen -r
+      | less --quit-if-one-screen -R
 }
