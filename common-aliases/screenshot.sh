@@ -7,6 +7,12 @@ __try_notify() {
       "$(basename $1)"
 }
 
+__try_notify_fail() {
+    which notify-send || return 0
+    notify-send "Failed to take screenshot" \
+      "Error code: $1"
+}
+
 local_screenshot_old () {
     local FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
     grim -g "$(slurp)" "$FILENAME"
@@ -22,11 +28,15 @@ local_screenshot () {
     imv -s none /proc/self/fd/0 <<< $screenshot &
     local imv_pid=$!
 
-    local selection="$(slurp -df '%wx%h+%x+%y')"
-    if [ $? -eq 0 ]; then
+    local selection
+    selection="$(slurp -df '%wx%h+%x+%y')"
+    local errcode=$?
+    if [ $errcode -eq 0 ]; then
         convert -crop "${selection}" ppm:- "${FILENAME}" <<< $screenshot
         wl-copy < "${FILENAME}"
-        __try_notify "${FILENAME}" 
+        __try_notify "${FILENAME}"
+    else
+        __try_notify_fail "${errcode}"
     fi
 
     kill -SIGKILL ${imv_pid}

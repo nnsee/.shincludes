@@ -15,4 +15,3 @@ vd() {
 vl() {
     ls "$HOME/.venv/"
 }
-
