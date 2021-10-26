@@ -17,6 +17,10 @@ saved() {
     done
 }
 
+randchars () {
+    < /dev/urandom tr -dc 'a-zA-Z0-9' | head -c $1
+}
+
 bgr() {
     # run in background, silence everything
     nohup $@ 2>&1 > /dev/null &
