@@ -1,3 +1,5 @@
+# depends: bat git
+
 bcat() {
     # cat a binary file
     for bin in "$@"; do
@@ -5,7 +7,7 @@ bcat() {
         if [[ -z "$LOCATION" ]]; then
             echo "no such bin: $bin" 1>&2
         else
-            cat "$LOCATION"
+            bat "$LOCATION"
         fi
     done
 }
