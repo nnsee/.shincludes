@@ -22,15 +22,14 @@
     }
 }
 
+alias code='code --force-device-scale-factor=1'
+
 alias bthp='bluetoothctl power on; bluetoothctl connect 94:DB:56:6B:E3:8A'
 
 alias weather='curl -s v2.wttr.in/Tallinn | head -n-1'
 
 alias ip='ip -h -c' # adds some colour
 alias ipa='ip -br a' # brief IP listing
-
-# depends: highlight
-alias ccat='highlight -O truecolor --base16'
 
 # depends: nvim
 alias svim='sudo -E nvim'
