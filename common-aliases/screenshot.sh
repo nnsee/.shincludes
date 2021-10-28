@@ -2,13 +2,13 @@
 # optional depends: libnotify
 
 __try_notify() {
-    which notify-send || return 0
-    notify-send --icon $1 "Image copied to clipboard" \
+    which notify-send 2>&1 > /dev/null || return 0
+    notify-send --icon "$1" "Image copied to clipboard" \
       "$(basename $1)"
 }
 
 __try_notify_fail() {
-    which notify-send || return 0
+    which notify-send 2>&1 > /dev/null || return 0
     notify-send "Failed to take screenshot" \
       "Error code: $1"
 }
