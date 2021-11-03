@@ -2,7 +2,7 @@
 
 # virtualenv prompt prompt
 
-HOSTNAME=$(hostname)
+HOSTNAME=$(</proc/sys/kernel/hostname)
 
 function virtual_env_prompt () {
     REPLY=${VIRTUAL_ENV+(${VIRTUAL_ENV:t}) }
