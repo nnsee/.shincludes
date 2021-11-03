@@ -1,8 +1,8 @@
 # depends: python3
 
-vn() {
+vn() (
     python3 -m venv "$HOME/.venv/$@"
-}
+)
 
 va() {
     source "$HOME/.venv/$@/bin/activate"
@@ -12,6 +12,6 @@ vd() {
     deactivate
 }
 
-vl() {
+vl() (
     ls "$HOME/.venv/"
-}
+)

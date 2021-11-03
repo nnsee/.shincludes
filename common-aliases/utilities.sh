@@ -1,33 +1,33 @@
 # depends: bat git
 
-bcat() {
+bcat() (
     # cat a binary file
     for bin in "$@"; do
-        local LOCATION=$(/usr/bin/which --skip-functions "$bin" 2>/dev/null)
+        LOCATION=$(/usr/bin/which --skip-functions "$bin" 2>/dev/null)
         if [[ -z "$LOCATION" ]]; then
             echo "no such bin: $bin" 1>&2
         else
             bat "$LOCATION"
         fi
     done
-}
+)
 
-saved() {
+saved() (
     # my Downloads is a tmpfs
     for file in $@; do
         mv "$file" "$HOME/SavedDownloads/$file"
     done
-}
+)
 
-randchars () {
+randchars() (
     < /dev/urandom tr -dc 'a-zA-Z0-9' | head -c $1
-}
+)
 
-bgr() {
+bgr() (
     # run in background, silence everything
     nohup $@ 2>&1 > /dev/null &
     disown
-}
+)
 
 incognito() {
     # disable history
@@ -39,14 +39,14 @@ incognito() {
     export INCOGNITO=1
 }
 
-glog() {
+glog() (
     # pretty git log
-    local LOG="git log --color --graph \
+    LOG="git log --color --graph \
       --pretty=format:'%G? %C(dim)%h%Creset %s %Cgreen(%cr)%C(yellow)%d%C(blue) <%an>%Creset' \
       --abbrev-commit"
-    local PR1='s/(\*.*\s)('
-    local PR2=')(\s.*[a-f0-9]{7})/\1\x1b['
-    local PR3='m\2\x1b[0m\3/g'
+    PR1='s/(\*.*\s)('
+    PR2=')(\s.*[a-f0-9]{7})/\1\x1b['
+    PR3='m\2\x1b[0m\3/g'
     eval $LOG | sed -E \
       -e "${PR1}B${PR2}31${PR3}"   `# B - Bad`               \
       -e "${PR1}G${PR2}1;32${PR3}" `# G - Good`              \
@@ -57,4 +57,4 @@ glog() {
       -e "${PR1}E${PR2}33${PR3}"   `# E - Missing key`       \
       -e "${PR1}N${PR2}2${PR3}"    `# N - No signature`      \
       | less --quit-if-one-screen -R
-}
+)
