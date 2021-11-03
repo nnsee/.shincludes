@@ -2,24 +2,24 @@
 
 # depends: paru
 {[ "${ID}" = "arch" ] || [ "${ID_LIKE}" = "arch" ]} && {
-    alias i='paru -S'
-    alias up='paru -Syu'
-    alias whoowns='paru -Qo'
-    alias ownswhom='paru -Ql'
-    alias whatprovides='paru -F'
+  alias i='paru -S'
+  alias up='paru -Syu'
+  alias whoowns='paru -Qo'
+  alias ownswhom='paru -Ql'
+  alias whatprovides='paru -F'
 }
 
 # depends: apt-file
 {[ "${ID}" = "ubuntu" ] || [ "${ID}" = "debian" ]} && {
-    alias i='sudo apt install'
-    alias up='sudo apt update && sudo apt -y full-upgrade'
-    alias whoowns='dpkg -S'
-    alias ownswhom='dpkg -L'
-    function whatprovides {
-        for file in $@; do
-            apt-file find -x "/${file}\$"
-        done
-    }
+  alias i='sudo apt install'
+  alias up='sudo apt update && sudo apt -y full-upgrade'
+  alias whoowns='dpkg -S'
+  alias ownswhom='dpkg -L'
+  function whatprovides {
+    for file in $@; do
+      apt-file find -x "/${file}\$"
+    done
+  }
 }
 
 alias code='code --force-device-scale-factor=1'
