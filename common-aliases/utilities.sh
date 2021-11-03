@@ -26,7 +26,6 @@ randchars() (
 bgr() (
   # run in background, silence everything
   nohup $@ 2>&1 > /dev/null &
-  disown
 )
 
 incognito() {
