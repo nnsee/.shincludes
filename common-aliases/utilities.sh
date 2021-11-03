@@ -3,7 +3,7 @@
 bcat() (
   # cat a binary file
   for bin in "$@"; do
-    LOCATION=$(/usr/bin/which --skip-functions "$bin" 2>/dev/null)
+    LOCATION=$(whence -p "$bin")
     if [[ -z "$LOCATION" ]]; then
       echo "no such bin: $bin" 1>&2
     else
