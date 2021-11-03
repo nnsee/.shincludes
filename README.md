@@ -1,9 +1,7 @@
 ### my zsh includes
 
-include these by adding the following lines to `.zshrc`:
+include these by adding the following line to `.zshrc`:
 
 ```
-for includefile in $HOME/.shincludes/**/*.sh; do
-	. "$includefile"
-done
+. ~/.shincludes/include.sh
 ```
