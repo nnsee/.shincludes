@@ -14,9 +14,7 @@ bcat() (
 
 saved() (
   # my Downloads is a tmpfs
-  for file in $@; do
-    mv "$file" "$HOME/SavedDownloads/$file"
-  done
+  mv $@ "$HOME/SavedDownloads/"
 )
 
 randchars() (
