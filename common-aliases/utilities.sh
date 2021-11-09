@@ -53,5 +53,5 @@ glog() (
     -e "${PR1}R${PR2}33${PR3}"   `# R - Good, revoked key` \
     -e "${PR1}E${PR2}33${PR3}"   `# E - Missing key`       \
     -e "${PR1}N${PR2}2${PR3}"    `# N - No signature`      \
-    | less --quit-if-one-screen -R
+    | less --quit-if-one-screen -XR
 )
