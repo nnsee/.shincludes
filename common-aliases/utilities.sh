@@ -55,3 +55,9 @@ glog() (
     -e "${PR1}N${PR2}2${PR3}"    `# N - No signature`      \
     | less --quit-if-one-screen -XR
 )
+
+latest() (
+  # prints the latest file that matches a pattern
+  [ -z "$@" ] && pattern=* || pattern="$@"
+  eval "echo -n ${pattern}(om[1])"
+)
