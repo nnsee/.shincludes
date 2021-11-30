@@ -61,3 +61,8 @@ latest() (
   [ -z "$@" ] && pattern=* || pattern="$@"
   eval "echo -n ${pattern}(om[1])"
 )
+
+enforce_lid_state() (
+    grep -q "closed" /proc/acpi/button/lid/LID/state && cmd=disable || cmd=enable
+    swaymsg output eDP-1 $cmd
+)
