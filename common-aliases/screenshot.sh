@@ -13,6 +13,18 @@ __try_notify_fail() (
     "Error code: $1"
 )
 
+__slurp_windows() (
+  WINDOWS=$(swaymsg -t get_tree | \
+    jq -r '.. | select(.pid? and .visible?) | .rect | 
+    "\(.x),\(.y) \(.width)x\(.height)"' | \
+    slurp $@)
+  RET=$?
+  if [ $RET -eq 0 ]; then
+    echo -n "$WINDOWS"
+  fi
+  return $RET
+)
+
 local_screenshot_old() (
   FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
   grim -g "$(slurp)" "$FILENAME"
@@ -28,8 +40,7 @@ local_screenshot() (
   imv -s none /proc/self/fd/0 <<< $screenshot &
   imv_pid=$!
 
-  selection
-  selection="$(slurp -df '%wx%h+%x+%y')"
+  selection="$(__slurp_windows -df '%wx%h+%x+%y')"
   errcode=$?
   if [ $errcode -eq 0 ]; then
     convert -crop "${selection}" ppm:- "${FILENAME}" <<< $screenshot
