@@ -40,7 +40,7 @@ glog() (
   # pretty git log
   LOG="git log --color --graph \
     --pretty=format:'%G? %C(dim)%h%Creset %s %Cgreen(%cr)%C(yellow)%d%C(blue) <%an>%Creset' \
-    --abbrev-commit"
+    --abbrev-commit $@"
   PR1='s/(\*.*\s)('
   PR2=')(\s.*[a-f0-9]{7})/\1\x1b['
   PR3='m\2\x1b[0m\3/g'
