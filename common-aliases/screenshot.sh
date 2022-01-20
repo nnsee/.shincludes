@@ -1,4 +1,4 @@
-# depends: grim slurp imagemagick imv wl-clipboard curl
+# depends: grim slurp imagemagick imv wl-clipboard curl ffmpeg wf-recorder
 # optional depends: libnotify
 
 __try_notify() (
@@ -13,9 +13,24 @@ __try_notify_fail() (
     "Error code: $1"
 )
 
+__try_notify_rec() (
+  whence -p notify-send > /dev/null || return 0
+  ICON=$(mktemp --suffix .png)
+  ffmpeg -y -i "$1" -vframes 1 -f image2 "${ICON}"
+  notify-send --icon "${ICON}" "Recording copied to clipboard" \
+    "$(basename $1)"
+  rm "${ICON}"
+)
+
+__try_notify_fail_rec() (
+  whence -p notify-send > /dev/null || return 0
+  notify-send "Failed to take recording" \
+    "Error code: $1"
+)
+
 __slurp_windows() (
   WINDOWS=$(swaymsg -t get_tree | \
-    jq -r '.. | select(.pid? and .visible?) | .rect | 
+    jq -r '.. | select(.pid? and .visible?) | .rect |
     "\(.x),\(.y) \(.width)x\(.height)"' | \
     slurp $@)
   RET=$?
@@ -51,4 +66,23 @@ local_screenshot() (
   fi
 
   kill -SIGKILL ${imv_pid}
+)
+
+local_screenrecord() (
+  RUNPID=$(pidof wf-recorder)
+  if [ ! -z "${RUNPID}" ]; then
+    kill -s SIGINT $RUNPID
+    return
+  fi
+
+  selection="$(__slurp_windows)"
+  errcode=$?
+  if [ $errcode -eq 0 ]; then
+    FILENAME=/home/xx/Videos/rec/$(date '+%F-%H-%M-%S').mp4
+    wf-recorder -g "${selection}" -f "${FILENAME}"
+    wl-copy < "${FILENAME}"
+    __try_notify_rec "${FILENAME}"
+  else
+    __try_notify_fail_rec "${errcode}"
+  fi
 )
