@@ -10,7 +10,7 @@
 }
 
 # depends: apt-file
-{[ "${ID}" = "ubuntu" ] || [ "${ID}" = "debian" ]} && {
+{[ "${ID}" = "ubuntu" ] || [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ]} && {
   alias i='sudo apt install'
   alias up='sudo apt update && sudo apt -y full-upgrade'
   alias whoowns='dpkg -S'
