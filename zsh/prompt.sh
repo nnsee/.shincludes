@@ -21,12 +21,12 @@ grml_theme_add_token ssh-conn -f ssh_conn_prompt '%F{white}' '%f'
 # render root as red
 
 function root_red_prompt () {
-  [ "${UID}" = "0" ] && REPLY='%F{red}'
+  REPLY='%(!.%F{red}#%f.%%) '
 }
 
 grml_theme_add_token root-red -f root_red_prompt
 
-zstyle ':prompt:grml:left:setup' items rc ssh-conn virtual-env change-root path root-red percent
+zstyle ':prompt:grml:left:setup' items rc ssh-conn virtual-env change-root path root-red
 zstyle ':prompt:grml:right:setup' use-rprompt false
 RPS1=''
 
