@@ -35,6 +35,6 @@ alias ipa='ip -br a' # brief IP listing
 alias svim='sudo -E nvim'
 
 # depends: exa
-alias ls='exa -lh --git'
+alias ls='exa -lh'
 
 alias clear-logs='sudo /bin/sh -c "journalctl --rotate && journalctl --vacuum-time=1s"'
