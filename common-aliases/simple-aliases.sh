@@ -22,8 +22,6 @@
   }
 }
 
-alias code='code --force-device-scale-factor=1'
-
 alias bthp='bluetoothctl power on; bluetoothctl connect 94:DB:56:6B:E3:8A'
 
 alias weather='curl -s v2.wttr.in/Tallinn | head -n-1'
