@@ -7,6 +7,7 @@
   alias whoowns='paru -Qo'
   alias ownswhom='paru -Ql'
   alias whatprovides='paru -F'
+  type pacs 1>/dev/null && alias paru='pacs'
 }
 
 # depends: apt-file
