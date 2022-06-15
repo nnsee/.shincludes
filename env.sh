@@ -11,3 +11,6 @@ export PATH="$PATH:$HOME/.nimble/bin"
 # docker rootless
 export PATH=$HOME/bin:$PATH
 export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
+
+# prettier time format
+export TIMEFMT=$'== time ==\ncpu  %P\nusr  %*U\nsys  %*S\ntot  %*E'
