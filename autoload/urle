@@ -1,0 +1,6 @@
+# depends: jq
+
+urle() (
+  [[ -p /dev/stdin ]] && IN="$(</dev/stdin)" || IN="${@}"
+  echo -n "${IN}" | jq -sRr @uri
+)

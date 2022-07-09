@@ -1,0 +1,4 @@
+urld() (
+  [[ -p /dev/stdin ]] && IN="$(</dev/stdin)" || IN="${@}"
+  echo -ne "$(echo -n ${IN} | sed 's/+/ /g;s/%\(..\)/\\x\1/g;')"
+)

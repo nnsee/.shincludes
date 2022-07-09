@@ -1,0 +1,4 @@
+saved() (
+  # my Downloads is a tmpfs
+  mv $@ "$HOME/SavedDownloads/"
+)

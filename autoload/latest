@@ -1,0 +1,5 @@
+latest() (
+  # prints the latest file that matches a pattern
+  [ -z "$@" ] && pattern=* || pattern="$@"
+  eval "echo -n ${pattern}(om[1])"
+)

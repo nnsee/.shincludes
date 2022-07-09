@@ -1,11 +1,5 @@
 # depends: wireguard-tools
 
-wgu() (
-  for interface in "$@"; do
-    sudo wg-quick up "${interface}-wg"
-  done
-)
-
 wgd() (
   if [[ -z "${@}" ]]; then
     # bring all down
