@@ -20,4 +20,7 @@ for file in "${PATHS[@]}"; do
 	[ -f "$file" ] && source "$file"
 done
 
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1  # performance boost
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=64
+
 unset PATHS
