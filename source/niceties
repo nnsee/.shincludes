@@ -1,20 +1,27 @@
 [ -z "${ID+x}" ] && source /etc/os-release
 
-[ "${ID}" = "arch" ] || [ "${ID_LIKE}" = "arch" ] && \
+if [ "${ID}" = "arch" ] || [ "${ID_LIKE}" = "arch" ]; then
 	local PATHS=(
 		"/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 		"/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 		"/usr/share/fzf/completion.zsh"
 		"/usr/share/fzf/key-bindings.zsh"
 	)
-
-[ "${ID}" = "ubuntu" ] || [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ] && \
+elif [ "${ID}" = "ubuntu" ] || [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ]; then
 	local PATHS=(
 		"/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 		"/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 		"/usr/share/doc/fzf/examples/completion.zsh"
 		"/usr/share/doc/fzf/examples/key-bindings.zsh"
 	)
+else
+        local PATHS=(
+                "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+                "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+                "$HOME/.zsh/fzf/shell/completion.zsh"
+                "$HOME/.zsh/fzf/shell/key-bindings.zsh"
+        )
+fi
 
 for file in "${PATHS[@]}"; do
 	[ -f "$file" ] && source "$file"
