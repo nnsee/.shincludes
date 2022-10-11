@@ -44,5 +44,6 @@ alias svim='sudo -E nvim'
 
 # depends: exa
 alias ls='exa -lh'
+alias lst='ls --tree'
 
 alias clear-logs='sudo /bin/sh -c "journalctl --rotate && journalctl --vacuum-time=1s"'
