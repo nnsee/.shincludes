@@ -21,7 +21,7 @@ grml_theme_add_token ssh-conn -f ssh_conn_prompt '%F{white}' '%f'
 # render root as red
 
 function root_red_prompt () {
-  REPLY='%(!.%F{red}#%f.%%) '
+  REPLY='%(!.%F{red}#%f.$) '
 }
 
 grml_theme_add_token root-red -f root_red_prompt
