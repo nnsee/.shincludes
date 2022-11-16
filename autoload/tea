@@ -1,0 +1,18 @@
+tea() (
+    started=$(date '+%s')
+    id=0
+    while true; do
+        t_start=$(date '+%s%N')
+
+        secs=$(( $(date '+%s') - started ))
+        h=$(( secs / 3600 ))
+        m=$(( ( secs / 60 ) % 60 ))
+        s=$(( secs % 60 ))
+
+        id=$(notify-send --icon "$HOME/Pictures/misc/teapot.png" "Tea timer" "$(printf "%02d:%02d:%02d\n" "$h" "$m" "$s")" -p --replace-id "$id")
+
+        t_end=$(date '+%s%N')
+
+        sleep $(( 1 - ( t_end - t_start ) / 1000000000. ))
+    done
+)
