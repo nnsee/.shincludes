@@ -15,6 +15,5 @@ rofi_open_in_code() (
     )
     [ -z "$selection" ] && return 1
 
-    cd "${DIR}/${selection}"
-    alacritty -e nvim .
+    code "${DIR}/${selection}"
 )
