@@ -47,3 +47,6 @@ alias ls='exa -lh'
 alias lst='ls --tree'
 
 alias clear-logs='sudo /bin/sh -c "journalctl --rotate && journalctl --vacuum-time=1s"'
+
+# depends: bat
+alias bat='bat -pp'
