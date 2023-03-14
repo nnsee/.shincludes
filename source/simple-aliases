@@ -3,7 +3,7 @@
 # depends: paru
 {[ "${ID}" = "arch" ] || [ "${ID_LIKE}" = "arch" ]} && {
   alias i='paru -S'
-  alias up='paru -Syu'
+  alias up='DFT_COLOR=always paru -Syu'
   alias whoowns='paru -Qo'
   alias ownswhom='paru -Ql'
   alias whatprovides='paru -F'
