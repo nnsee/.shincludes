@@ -1,4 +1,0 @@
-urle_all() (
-  [[ -p /dev/stdin ]] && IN="$(</dev/stdin)" || IN="${@}"
-  echo -n "${IN}" | xxd -p | sed 's/../%&/g'
-)
