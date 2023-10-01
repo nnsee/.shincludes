@@ -1,4 +1,0 @@
-b64d() (
-	[[ -p /dev/stdin ]] && IN="$(</dev/stdin)" || IN="${@}"
-	base64 -d <<< "${IN}"
-)
