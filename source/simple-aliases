@@ -50,3 +50,6 @@ alias clear-logs='sudo /bin/sh -c "journalctl --rotate && journalctl --vacuum-ti
 
 # depends: bat
 alias bat='bat -pp'
+
+# depends: lazygit
+alias lg='lazygit'
