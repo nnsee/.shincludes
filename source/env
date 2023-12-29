@@ -13,8 +13,8 @@ export PATH="$PATH:$HOME/.nimble/bin"
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export PATH="$PATH:$HOME/.npm-packages/bin"
 
-# docker rootless
-export PATH=$HOME/bin:$PATH
-
 # prettier time format
 export TIMEFMT=$'cpu %P | usr %*U | sys %*S | tot %*E'
+
+# really, who uses less in [current year]
+export PAGER=cat
