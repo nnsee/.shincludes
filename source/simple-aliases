@@ -53,3 +53,6 @@ alias bat='bat -pp'
 
 # depends: lazygit
 alias lg='lazygit'
+
+# depends: rsync
+alias rcp='rsync -chavzP --stats'
