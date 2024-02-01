@@ -1,0 +1,15 @@
+updpkg() (
+  set -e
+
+  [ "$#" -eq 1 ]
+
+  sed -i "s/^pkgver=.*/pkgver=$1/" PKGBUILD
+
+  updpkgsums
+  makepkg --printsrcinfo > .SRCINFO
+  makepkg -si
+  git add PKGBUILD .SRCINFO
+  git commit -m "update to $1"
+
+  git show
+)
