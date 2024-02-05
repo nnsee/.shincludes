@@ -14,6 +14,12 @@ elif [ "${ID}" = "ubuntu" ] || [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debia
 		"/usr/share/doc/fzf/examples/completion.zsh"
 		"/usr/share/doc/fzf/examples/key-bindings.zsh"
 	)
+elif [ "${ID}" = "fedora" ]; then
+	local PATHS=(
+		"/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+		"/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+		"/usr/share/fzf/shell/key-bindings.zsh"
+	)
 else
         local PATHS=(
                 "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

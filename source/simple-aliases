@@ -24,7 +24,7 @@
 }
 
 # depends: dnf
-[ "${ID}" = "rocky" ] && {
+{[ "${ID}" = "rocky" ] || [ "${ID}" = "fedora" ]} && {
   alias i='sudo dnf install'
   alias up='sudo dnf update'
   alias whoowns='rpm -qf'
