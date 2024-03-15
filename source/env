@@ -6,7 +6,7 @@ export GOPATH="$HOME/.go"
 export PATH="$PATH:$HOME/.go/bin"
 
 # todo: figure out why this breaks without explicitly setting it
-export SSH_AUTH_SOCK=/var/run/user/1000/gcr/ssh
+[[ -z "${SSH_AUTH_SOCK}" ]] && export SSH_AUTH_SOCK=/var/run/user/1000/gcr/ssh
 
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.nimble/bin"
