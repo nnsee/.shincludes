@@ -4,7 +4,8 @@ for includefile in ${_SHINCLUDES_PATH}/source/*; do
   . "$includefile"
 done
 
-fpath=( ${_SHINCLUDES_PATH}/autoload "${fpath[@]}" )
+fpath=( ${_SHINCLUDES_PATH}/autoload{,-private} "${fpath[@]}" )
 autoload -Uz ${_SHINCLUDES_PATH}/autoload/*(.:t)
+autoload -Uz ${_SHINCLUDES_PATH}/autoload-private/*(.:t)
 
 unset _SHINCLUDES_PATH
