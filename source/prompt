@@ -44,3 +44,5 @@ if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*) 
   add-zsh-hook -Uz precmd set_title_precmd
   add-zsh-hook -Uz preexec set_title_preexec
 fi
+
+setopt nocorrect
