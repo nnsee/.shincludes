@@ -1,0 +1,5 @@
+# aliases coreutils to their uutils variant, where possible
+
+for uu_cmd in ${(k)commands[(I)uu-*]#uu-\[}; do
+  eval "alias '${uu_cmd#uu-}'='${uu_cmd}'"
+done
