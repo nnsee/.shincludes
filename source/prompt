@@ -18,23 +18,38 @@ function ssh_conn_prompt () {
 
 grml_theme_add_token ssh-conn -f ssh_conn_prompt '%F{white}' '%f'
 
-# render root as red
-
-function root_red_prompt () {
-  REPLY='%(!.%F{red}#%f.$) '
+# Function to set the prompt dynamically
+function dyn_prompt () {
+  if [[ ${KEYMAP} == vicmd ]]; then
+    VI_MODE_SYMBOL="^"
+  else
+    VI_MODE_SYMBOL="$"
+  fi
+  REPLY="%(!.%F{red}#%f.${VI_MODE_SYMBOL}) "
 }
 
-grml_theme_add_token root-red -f root_red_prompt
+grml_theme_add_token dyn-prompt -f dyn_prompt
 
-zstyle ':prompt:grml:left:setup' items rc ssh-conn virtual-env change-root path root-red
+zstyle ':prompt:grml:left:setup' items rc ssh-conn virtual-env change-root path dyn-prompt
 zstyle ':prompt:grml:right:setup' use-rprompt false
 RPS1=''
+
+# Ensure vi keybindings are enabled
+bindkey -v
+
+# Hook to change the prompt when the keymap changes
+zle-keymap-select() {
+  prompt_grml_precmd
+  zle reset-prompt
+}
+
+# Register the hooks
+zle -N zle-keymap-select
 
 function set_title_precmd () {
   set_title ${(%):-"%~"}
 }
 
-# Sets the title as name of program currently running
 function set_title_preexec () {
   set_title "${(%):-}" "$2"
 }
@@ -51,14 +66,14 @@ function emit_osc_seq_preexec() {
 }
 
 function osc7_pwd() {
-    emulate -L zsh # also sets localoptions for us
-    setopt extendedglob
-    local LC_ALL=C
-    printf '\e]7;file://%s%s\e\' $HOST ${PWD//(#m)([^@-Za-z&-;_~])/%${(l:2::0:)$(([##16]#MATCH))}}
+  emulate -L zsh
+  setopt extendedglob
+  local LC_ALL=C
+  printf '\e]7;file://%s%s\e\' $HOST ${PWD//(#m)([^@-Za-z&-;_~])/%${(l:2::0:)$(([##16]#MATCH))}}
 }
 
 function chpwd_osc7_pwd() {
-    (( ZSH_SUBSHELL )) || osc7_pwd
+  (( ZSH_SUBSHELL )) || osc7_pwd
 }
 
 if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*|foot*) ]]; then
