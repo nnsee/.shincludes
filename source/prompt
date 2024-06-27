@@ -86,5 +86,3 @@ if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*|f
 fi
 
 setopt nocorrect
-
-KEYTIMEOUT=1
