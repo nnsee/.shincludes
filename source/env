@@ -1,8 +1,5 @@
 whence -p nvim > /dev/null && export EDITOR=nvim || true
 
-# use uutils
-export PATH="$HOME/.local/uu-bin:$PATH"
-
 # don't let golang dump stuff into $HOME
 export GOMODCACHE="$HOME/.cache/go-mod"
 export GOPATH="$HOME/.go"
