@@ -1,3 +1,5 @@
+[[ -n "${SHINCLUDES_ENV_DONE}" ]] && return 0
+
 whence -p nvim > /dev/null && export EDITOR=nvim || true
 
 # don't let golang dump stuff into $HOME
@@ -9,7 +11,7 @@ export PATH="$PATH:$HOME/.go/bin"
 [[ -z "${SSH_AUTH_SOCK}" ]] && export SSH_AUTH_SOCK=/var/run/user/1000/gcr/ssh
 
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.nimble/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export PATH="$PATH:$HOME/.npm-packages/bin"
 
@@ -18,3 +20,5 @@ export TIMEFMT=$'cpu %P | usr %*U | sys %*S | tot %*E'
 
 # really, who uses less in [current year]
 export PAGER=cat
+
+export SHINCLUDES_ENV_DONE=1
