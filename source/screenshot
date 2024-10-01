@@ -51,7 +51,7 @@ local_screenshot() (
   # requires the following line in sway config to work properly
   # for_window [title="imv.*/proc/self/fd/0"] fullscreen global
   FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
-  screenshot="$(grim -c -t ppm /proc/self/fd/1)"
+  screenshot="$(grim -c /proc/self/fd/1)"
   imv -s none /proc/self/fd/0 <<< $screenshot &
   imv_pid=$!
 
