@@ -1,6 +1,6 @@
 _SHINCLUDES_PATH="$(dirname $(readlink -f "${(%):-%x}"))"
 
-for includefile in ${_SHINCLUDES_PATH}/source/*; do
+for includefile in ${_SHINCLUDES_PATH}/source/^*.fish; do
   . "$includefile"
 done
 

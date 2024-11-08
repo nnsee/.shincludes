@@ -58,7 +58,7 @@ local_screenshot() (
   selection="$(__slurp_windows -df '%wx%h+%x+%y')"
   errcode=$?
   if [ $errcode -eq 0 ]; then
-    convert -crop "${selection}" ppm:- "${FILENAME}" <<< $screenshot
+    convert -crop "${selection}" png:- "${FILENAME}" <<< $screenshot
     wl-copy < "${FILENAME}"
     __try_notify "${FILENAME}"
   else
