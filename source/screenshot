@@ -51,14 +51,14 @@ local_screenshot() (
   # requires the following line in sway config to work properly
   # for_window [title="imv.*/proc/self/fd/0"] fullscreen global
   FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
-  screenshot="$(grim -c /proc/self/fd/1)"
+  screenshot="$(grim -c -l 0 /proc/self/fd/1)"
   imv -s none /proc/self/fd/0 <<< $screenshot &
   imv_pid=$!
 
   selection="$(__slurp_windows -df '%wx%h+%x+%y')"
   errcode=$?
   if [ $errcode -eq 0 ]; then
-    convert -crop "${selection}" png:- "${FILENAME}" <<< $screenshot
+    magick convert -crop "${selection}" png:- - <<< $screenshot | pngquant --strip --force --nofs - > "${FILENAME}"
     wl-copy < "${FILENAME}"
     __try_notify "${FILENAME}"
   else
