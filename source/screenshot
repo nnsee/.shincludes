@@ -52,7 +52,7 @@ local_screenshot() (
   # for_window [title="imv.*/proc/self/fd/0"] fullscreen global
   FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
   screenshot="$(grim -c -l 0 /proc/self/fd/1)"
-  imv -s none /proc/self/fd/0 <<< $screenshot &
+  imv -s none -c center /proc/self/fd/0 <<< $screenshot &
   imv_pid=$!
 
   selection="$(__slurp_windows -df '%wx%h+%x+%y')"
