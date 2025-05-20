@@ -51,6 +51,7 @@ local_screenshot() (
   FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
 
   hyprpicker -r -z &
+  sleep 0.1
   picker_pid=$!
 
   selection="$(__slurp_windows)"
