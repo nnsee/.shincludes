@@ -48,12 +48,14 @@ local_screenshot_old() (
 
 local_screenshot() (
   FILENAME=/home/xx/Pictures/ss/$(date '+%F-%H-%M-%S').png
+  PIPE="${XDG_RUNTIME_DIR:-/tmp}/wl-freeze-$$"
 
-  exec 3< <(~/.cargo/bin/wl-freeze)
+  mkfifo "$PIPE"
+  ~/.cargo/bin/wl-freeze > "$PIPE" &
   picker_pid=$!
 
-  read ready_signal <&3
-  exec 3<&-
+  read ready_signal < "$PIPE"
+  rm "$PIPE"
 
   selection="$(__slurp_windows)"
   errcode=$?
